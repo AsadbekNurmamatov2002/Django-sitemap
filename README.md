@@ -19,19 +19,19 @@ Biz saytlar ramkasini va sayt xaritalari ilovasini loyihamiz sozlamalariga qo‘
 
 __2-qadam: Ma'lumotlar bazasini yangilash__
 
->    from django.db import models
->    from django.urls import reverse
->    #Create your models here.
->    class Post(models.Model):
->        title=models.CharField(max_length=250)
->        slug = models.SlugField(blank=True, null=True)
->        vaqt=models.DateTimeField(blank=True, null=True)
->        body=models.TextField()
->        def __str__(self):
->          return self.title
->        def get_absolute_url(self): 
->           return reverse('posts',args=[self.id,
->                                        self.slug])
+>      from django.db import models
+>      from django.urls import reverse
+>      #Create your models here.
+>      class Post(models.Model):
+>          title=models.CharField(max_length=250)
+>          slug = models.SlugField(blank=True, null=True)
+>          vaqt=models.DateTimeField(blank=True, null=True)
+>          body=models.TextField()
+>          def __str__(self):
+>            return self.title
+>          def get_absolute_url(self): 
+>             return reverse('posts',args=[self.id,
+>                                          self.slug])
 
 Biz buni terminalda migratsiyani ishga tushirish orqali qilamiz
 >      python3 manage.py makemigrations
