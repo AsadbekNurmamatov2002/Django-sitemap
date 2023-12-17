@@ -93,3 +93,32 @@ Endi biz mahalliy serverni ishga tushirish va http://127.0.0.1:8000/sitemap.xml 
 ![image](https://github.com/AsadbekNurmamatov2002/Django-sitemap/assets/144318530/1f4707d8-4f03-4c6b-9c0e-92040f94b12a)
 __6-qadam: http://127.0.0.1:8000/sitemap.xml ga kiramiz__
 ![image](https://github.com/AsadbekNurmamatov2002/Django-sitemap/assets/144318530/19bf59da-3eb6-42a7-b642-79a6e871210e)
+
+# Blog postlari uchun Feeds yaratish
+__RSS (Really Simple Syndication) tasmasi__
+RSS (Really Simple Syndication) – foydalanuvchilarga va ilovalarga standartlashtirilgan, kompyuterda o‘qiladigan formatda veb-saytlar yangilanishlariga kirish imkonini beruvchi veb-tasmasi. Bu tasmalar, masalan, foydalanuvchiga bitta yangiliklar agregatorida ko'plab turli veb-saytlarni kuzatib borish imkonini beradi. Django bizning blogimiz uchun atom tasmasi yaratish uchun kutubxona bilan birga keladi. __
+__feeds.py
+Ushbu ilovaga RSS yoki Atom tasmalarini qo‘shish uchun biz biror joyda Feed sinfini yaratishimiz va uni URL manzilimizga qo‘shishimiz kerak. Agar siz bir nechta tasmani xohlasangiz, buni ma'lum bir ilova ichida qilish mantiqiy bo'lishi mumkin. Biroq, agar siz loyiha uchun bitta asosiy tasmaga ega bo'lishni istasangiz, uni loyiha darajasidagi katalogga qo'shsangiz yaxshi bo'ladi. Biz bu yerda shunday qilamiz.
+
+Ushbu Qo‘llanmalar ilovasi uchun kattaroq loyiha django_project deb ataladi. Shuning uchun biz loyiha darajasidagi katalogda django_project/feeds.py nomli yangi fayl yaratamiz. Mana fayl mazmuni
+
+
+>      from .models import Post
+>
+>       class LatestPostsFeed(Feed):
+>           title = "Tutorials"
+>           link = "home"
+>           description = "Recent free tutorials on LearnDjango.com."
+>
+>           def items(self):
+>             return Post.objects.order_by('title')[:100]
+>
+>           def item_title(self, item):
+>             return item.title
+>
+>           def item_description(self, item):
+>             return truncatewords(item.body, 30)
+>  
+>           def item_lastupdated(self, item):
+>             return item.vaqt
+> 
