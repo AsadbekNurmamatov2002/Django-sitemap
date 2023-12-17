@@ -18,6 +18,21 @@ __1-qadam: Bularni INSTALLED_APPS bo‘limingizga qo‘shing__
 Biz saytlar ramkasini va sayt xaritalari ilovasini loyihamiz sozlamalariga qo‘shamiz. __SITE_ID__ ushbu Django loyihasida qancha veb-saytlar mavjudligini aniqlaydi.
 
 __2-qadam: Ma'lumotlar bazasini yangilash__
+
+>    from django.db import models
+>    from django.urls import reverse
+>    #Create your models here.
+>    class Post(models.Model):
+>        title=models.CharField(max_length=250)
+>        slug = models.SlugField(blank=True, null=True)
+>        vaqt=models.DateTimeField(blank=True, null=True)
+>        body=models.TextField()
+>        def __str__(self):
+>          return self.title
+>        def get_absolute_url(self): 
+>           return reverse('posts',args=[self.id,
+>                                        self.slug])
+
 Biz buni terminalda migratsiyani ishga tushirish orqali qilamiz
 >      python3 manage.py makemigrations
 >      python3 manage.py migrate
@@ -40,10 +55,7 @@ Bu ilova darajasidagi katalogda amalga oshiriladi. urls.py da GenericSitemap sin
 >          return Post.objects.all()
 >
 >       def lastmod(self, obj):
->          return obj.last_modified
->
->       def location(self, obj):
->          return f'/blog/{obj.slug}'
+>          return obj.vaqt
 > 
 Biz yuqorida import qilingan sinfini kengaytiruvchi PostSitemap sayt xaritasi sinfini yaratamiz. Qo'shilgan atributlar quyidagicha izohlanadi:Sitemap
 
@@ -79,4 +91,5 @@ Administrator interfeysiga o‘ting (quyida skrinshotga qarang) va example.com t
 
 Endi biz mahalliy serverni ishga tushirish va http://127.0.0.1:8000/sitemap.xml sahifasiga o‘tish orqali sayt xaritasi ko‘rsatilishini tekshirishimiz mumkin.
 ![image](https://github.com/AsadbekNurmamatov2002/Django-sitemap/assets/144318530/1f4707d8-4f03-4c6b-9c0e-92040f94b12a)
-
+__6-qadam: http://127.0.0.1:8000/sitemap.xml ga kiramiz__
+![image](https://github.com/AsadbekNurmamatov2002/Django-sitemap/assets/144318530/19bf59da-3eb6-42a7-b642-79a6e871210e)
