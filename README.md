@@ -1,5 +1,7 @@
 # Django-sitemap
 sitemap
+![image](https://github.com/AsadbekNurmamatov2002/Django-sitemap/assets/144318530/d2b68ea2-ad72-4aa2-b9f9-3d810bc97805)
+
 ### Django blog ilovasida sayt xaritasini yaratish bosqichlari
 Django ishlab chiquvchilarga o'z saytlari va sayt xaritasi tizimidan foydalangan holda dinamik ravishda sayt xaritalarini yaratishga imkon beradi. Blog ilovamizda sayt xaritasini yaratish uchun beshta oddiy qadamni bajaramiz.
 
