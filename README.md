@@ -98,9 +98,9 @@ __6-qadam: http://127.0.0.1:8000/sitemap.xml ga kiramiz__
 __RSS (Really Simple Syndication) tasmasi__
 RSS (Really Simple Syndication) – foydalanuvchilarga va ilovalarga standartlashtirilgan, kompyuterda o‘qiladigan formatda veb-saytlar yangilanishlariga kirish imkonini beruvchi veb-tasmasi. Bu tasmalar, masalan, foydalanuvchiga bitta yangiliklar agregatorida ko'plab turli veb-saytlarni kuzatib borish imkonini beradi. Django bizning blogimiz uchun atom tasmasi yaratish uchun kutubxona bilan birga keladi. __
 __feeds.py
-Ushbu ilovaga RSS yoki Atom tasmalarini qo‘shish uchun biz biror joyda Feed sinfini yaratishimiz va uni URL manzilimizga qo‘shishimiz kerak. Agar siz bir nechta tasmani xohlasangiz, buni ma'lum bir ilova ichida qilish mantiqiy bo'lishi mumkin. Biroq, agar siz loyiha uchun bitta asosiy tasmaga ega bo'lishni istasangiz, uni loyiha darajasidagi katalogga qo'shsangiz yaxshi bo'ladi. Biz bu yerda shunday qilamiz.
+Ushbu ilovaga RSS yoki Atom tasmalarini qo‘shish uchun biz biror joyda Feed sinfini yaratishimiz va uni URL manzilimizga qo‘shishimiz kerak. Agar siz bir nechta tasmani xohlasangiz, buni ma'lum bir ilova ichida qilish mantiqiy bo'lishi mumkin. Biroq, agar siz loyiha uchun bitta asosiy tasmaga ega bo'lishni istasangiz, uni loyiha darajasidagi katalogga qo'shsangiz yaxshi bo'ladi.
 
-Ushbu Qo‘llanmalar ilovasi uchun kattaroq loyiha django_project deb ataladi. Shuning uchun biz loyiha darajasidagi katalogda django_project/feeds.py nomli yangi fayl yaratamiz. Mana fayl mazmuni
+Ushbu Qo‘llanmalar ilovasi uchun kattaroq  ilova __myapp__ deb ataladi. Shuning uchun biz loyiha darajasidagi katalogda __myapp/feeds.py__ nomli yangi fayl yaratamiz. Mana fayl mazmuni
 
 
 >      from .models import Post
@@ -122,3 +122,16 @@ Ushbu Qo‘llanmalar ilovasi uchun kattaroq loyiha django_project deb ataladi. S
 >           def item_lastupdated(self, item):
 >             return item.vaqt
 > 
+__myapp/urls.py__ ni ko'rinishu shunday
+>        from .feeds import LatestPostsFeedfrom .feeds import LatestPostsFeed
+>        from django.urls import path
+>        from .views import Home, Postlar
+>
+>        app_name='myapp'
+>
+>        urlpatterns =[
+>            path('', Home, name='home'),
+>            path('post/<int:id>/<int:year>/<int:month>/<int:day>/<slug:post>/', Postlar, name='list_post'),
+>            path('feed/', LatestPostsFeed(), name='post_feed'),
+>        ]
+>
